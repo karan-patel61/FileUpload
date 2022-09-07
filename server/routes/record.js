@@ -14,9 +14,9 @@ const ObjectId = require("mongodb").ObjectId;
  
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
- let db_connect = dbo.getDb("sample_analytics");
+ let db_connect = dbo.getDb("employees");
  db_connect
-   .collection("customers")
+   .collection("records")
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
@@ -60,7 +60,14 @@ recordRoutes.route("/update/:id").post(function (req, response) {
      position: req.body.position,     
      level: req.body.level,   
    }, 
-  }
+  };
+  db_connect
+   .collection("records")
+   .updateOne(myquery, newvalues, function (err, res) {
+     if (err) throw err;
+     console.log("1 document updated");
+     response.json(res);
+   });
 });
  
 // This section will help you delete a record

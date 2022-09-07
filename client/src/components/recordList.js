@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
  //This code defines the Record fileds that are going to be displayed.
 const Record = (props) => (
  <tr>
-   <td>{props.record.username}</td>
+   <td>{props.record.name}</td>
    <td>{props.record.position}</td>
    <td>{props.record.level}</td>
    <td>

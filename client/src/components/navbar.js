@@ -11,7 +11,7 @@ export default function Navbar() {
  return (
    <div>
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-       <NavLink className="navbar-brand" to="/">
+       <NavLink className="navbar-brand" to="/"> Nav Link
        </NavLink>
        <button
          className="navbar-toggler"
