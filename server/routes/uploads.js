@@ -15,7 +15,7 @@ const ObjectId = require("mongodb").ObjectId;
  
 // This section will help you get a list of all the records.
 UploadsRoutes.route("/uploads").get(function (req, res) {
- let db_connect = dbo.getDb("FileSystem");
+ let db_connect = dbo.getUploads();
  db_connect
    .collection("uploads")
    .find({})
@@ -24,6 +24,20 @@ UploadsRoutes.route("/uploads").get(function (req, res) {
      res.json(result);
    });
 });
+
+// This section will help you create a new record.
+UploadsRoutes.route("/record/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+      name: req.file.originalname,
+      size: req.file.size,
+      type: req.file.mimetype,
+    };
+    db_connect.collection("uploads").insertOne(myobj, function (err, res) {
+      if (err) throw err;
+      response.json(res);
+    });
+   });
 
 //const selectedFile = document.getElementById('input').files[0];
 

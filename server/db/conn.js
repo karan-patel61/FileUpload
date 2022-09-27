@@ -5,7 +5,7 @@ const client = new MongoClient(Db, {
   useUnifiedTopology: true,
 });
  
-var _db;
+var _db,_db2;
  
 module.exports = {
   connectToServer: function (callback) {
@@ -14,6 +14,7 @@ module.exports = {
       if (db)
       {
         _db = db.db("employees");
+        _db2 = db.db("FileSystem");
         console.log("Successfully connected to MongoDB.");
       }
       return callback(err);
@@ -22,5 +23,8 @@ module.exports = {
  
   getDb: function () {
     return _db;
+  },
+  getUploads: function (){
+    return _db2;
   },
 };
