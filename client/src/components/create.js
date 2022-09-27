@@ -34,7 +34,7 @@ export default function Create() {
      window.alert(error);
      return;
    });
- 
+   
    setForm({ name: "", position: "", level: "" });
    navigate("/");
  }
