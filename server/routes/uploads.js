@@ -26,16 +26,18 @@ UploadsRoutes.route("/uploads").get(function (req, res) {
 });
 
 // This section will help you create a new record.
-UploadsRoutes.route("/record/add").post(function (req, response) {
-    let db_connect = dbo.getDb();
+UploadsRoutes.route("/uploadfile/add").post(function (req, response) {
+    let db_connect = dbo.getUploads();
     let myobj = {
-      name: req.file.originalname,
-      size: req.file.size,
-      type: req.file.mimetype,
+      name: req.body.name,
+      size: req.body.size,
+      type: req.body.mimetype,
     };
+    //console.log("A new file uploaded +"+myobj);
     db_connect.collection("uploads").insertOne(myobj, function (err, res) {
       if (err) throw err;
       response.json(res);
+      console.log("1 FILE UPLOADED");
     });
    });
 
