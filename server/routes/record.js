@@ -1,5 +1,7 @@
 const express = require("express");
- 
+const multer = require("multer");
+const {v4: uuidv4} = require("uuid");
+const path = require("path");
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -38,11 +40,15 @@ recordRoutes.route("/record/:id").get(function (req, res) {
  
 // This section will help you create a new record.
 recordRoutes.route("/record/add").post(function (req, response) {
+let d = Date();
+
  let db_connect = dbo.getDb();
  let myobj = {
    name: req.body.name,
    position: req.body.position,
    level: req.body.level,
+   photo: req.body.photo,
+   date: d
  };
  db_connect.collection("records").insertOne(myobj, function (err, res) {
    if (err) throw err;

@@ -15,6 +15,9 @@ const ObjectId = require("mongodb").ObjectId;
  
 // This section will help you get a list of all the records.
 UploadsRoutes.route("/uploads").get(function (req, res) {
+  if(req.files === null){
+    return res.status(400).json({msg: 'No File Uploaded'})
+  }
  let db_connect = dbo.getUploads();
  db_connect
    .collection("uploads")
@@ -31,7 +34,7 @@ UploadsRoutes.route("/uploadfile/add").post(function (req, response) {
     let myobj = {
       name: req.body.name,
       size: req.body.size,
-      type: req.body.mimetype,
+      type: req.body.type,
     };
     //console.log("A new file uploaded +"+myobj);
     db_connect.collection("uploads").insertOne(myobj, function (err, res) {
