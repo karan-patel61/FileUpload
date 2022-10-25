@@ -6,13 +6,15 @@ export default function Create() {
    name: "",
    position: "",
    level: "",
+   photo: "",
+   date_uploaded: ""
  });
  const navigate = useNavigate();
  
  // These methods will update the state properties.
  function updateForm(value) {
    return setForm((prev) => {
-     return { ...prev, ...value };
+    return { ...prev, ...value };
    });
  }
  
@@ -34,8 +36,8 @@ export default function Create() {
      window.alert(error);
      return;
    });
-   
-   setForm({ name: "", position: "", level: "" });
+   console.log(newPerson);
+   setForm({ name: "", position: "", level: "" ,photo: ""});
    navigate("/");
  }
  
@@ -43,7 +45,7 @@ export default function Create() {
  return (
    <div>
      <h3>Create New Record</h3>
-     <form onSubmit={onSubmit}>
+     <form onSubmit={onSubmit} encType="multipart/form-data">
        <div className="form-group">
          <label htmlFor="name">Name</label>
          <input
@@ -101,6 +103,14 @@ export default function Create() {
            />
            <label htmlFor="positionSenior" className="form-check-label">Senior</label>
          </div>
+       </div>
+       <div className="form-group">
+          <input 
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            name="file"
+            onChange={(e) => updateForm({ photo: e.target.files[0].name })}
+          />
        </div>
        <div className="form-group">
          <input
