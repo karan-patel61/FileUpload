@@ -13,7 +13,26 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
  
- 
+//This section will define the multer storage
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null,'../client/public/images/');
+  },
+  filename: function(req, file, cb){
+    cb(null, uuidv4()+file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg','image/png','image/jpg'];
+  if(allowedFileTypes.includes(file.mimetype)){
+    cb(null,true);
+  } else{
+    cb(null,false);
+  }
+}
+let upload = multer({storage: storage});
+
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
  let db_connect = dbo.getDb("employees");
@@ -39,20 +58,22 @@ recordRoutes.route("/record/:id").get(function (req, res) {
 });
  
 // This section will help you create a new record.
-recordRoutes.route("/record/add").post(function (req, response) {
+recordRoutes.route("/record/add").post(upload.single('photo'), (req, response) => {
 let d = Date();
-
+let image = req.body.photo;
  let db_connect = dbo.getDb();
  let myobj = {
    name: req.body.name,
    position: req.body.position,
    level: req.body.level,
-   photo: req.body.photo,
+   photo: req.file.filename,
    date: d
  };
  db_connect.collection("records").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
+   console.log(myobj);
+   //console.log("Request Body: "+req.body);
  });
 });
  
