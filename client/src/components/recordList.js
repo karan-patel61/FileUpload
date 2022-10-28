@@ -16,6 +16,11 @@ const Record = (props) => (
        Delete
      </button>
    </td>
+   <td>
+   <img
+      width="100px" 
+      src={`/images/${props.record.photo}`}/>
+   </td>
  </tr>
 );
  
