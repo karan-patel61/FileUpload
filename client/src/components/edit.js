@@ -128,7 +128,18 @@ export default function Edit() {
        </div>
        </div>
        <br />
- 
+       <div className="form-group">
+          <img
+          width="100px"
+          src={`/images/${form.photo}`}
+          />
+          <input 
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            name="photo"
+            onChange={(e) => updateForm({ photo: e.target.files[0] })}
+          />
+       </div>
        <div className="form-group">
          <input
            type="submit"

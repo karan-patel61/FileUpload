@@ -23,7 +23,7 @@ export default function Create() {
    e.preventDefault();
  
    // When a post request is sent to the create url, we'll add a new record to the database.
-   const newPerson = { ...form };
+   //When sending a file to backend we must user formData
    const formData = new FormData();
    formData.append('name',form.name);
    formData.append('photo', form.photo);
