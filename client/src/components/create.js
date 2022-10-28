@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
- 
+import axios from "axios";
 export default function Create() {
  const [form, setForm] = useState({
    name: "",
@@ -24,28 +24,32 @@ export default function Create() {
  
    // When a post request is sent to the create url, we'll add a new record to the database.
    const newPerson = { ...form };
- 
-   await fetch("http://localhost:5000/record/add", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-     },
-     body: JSON.stringify(newPerson),
-   })
-   .catch(error => {
-     window.alert(error);
-     return;
-   });
-   console.log(newPerson);
-   setForm({ name: "", position: "", level: "" ,photo: ""});
-   navigate("/");
- }
+   const formData = new FormData();
+   formData.append('name',form.name);
+   formData.append('photo', form.photo);
+   formData.append('position',form.position);
+   formData.append('level',form.level);
+   let noerr = false;    
+   axios.post("http://localhost:5000/record/add", formData)
+   .catch(err => {
+      console.log(err);
+      alert("Error Occured : Unable to add new record :(");
+    })
+    .then(res => {
+      console.log(formData);
+      setForm({ name: "", position: "", level: "" ,photo: ""});
+      navigate("/");
+      noerr = true;
+    })
+    if(noerr){navigate("/");}
+    //navigate("/");
+   }
  
  // This following section will display the form that takes the input from the user.
  return (
    <div>
      <h3>Create New Record</h3>
-     <form onSubmit={onSubmit} encType="multipart/form-data">
+     <form onSubmit={onSubmit} method="post" encType="multipart/form-data">
        <div className="form-group">
          <label htmlFor="name">Name</label>
          <input
@@ -108,8 +112,8 @@ export default function Create() {
           <input 
             type="file"
             accept=".png, .jpg, .jpeg"
-            name="file"
-            onChange={(e) => updateForm({ photo: e.target.files[0].name })}
+            name="photo"
+            onChange={(e) => updateForm({ photo: e.target.files[0] })}
           />
        </div>
        <div className="form-group">
