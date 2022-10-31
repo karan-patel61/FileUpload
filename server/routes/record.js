@@ -72,20 +72,23 @@ let image = req.body.photo;
  db_connect.collection("records").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
-   console.log(myobj);
+   console.log("1 New document added");
    //console.log("Request Body: "+req.body);
  });
 });
  
 // This section will help you update a record by id.
-recordRoutes.route("/update/:id").post(function (req, response) {
+recordRoutes.route("/update/:id").post(upload.single('photo'),function (req, response) {
  let db_connect = dbo.getDb(); 
- let myquery = { _id: ObjectId( req.params.id )}; 
+ let myquery = { _id: ObjectId( req.params.id )};
+ let d = Date(); 
  let newvalues = {   
    $set: {     
      name: req.body.name,    
      position: req.body.position,     
      level: req.body.level,   
+     photo: req.file.filename,
+     date: d
    }, 
   };
   db_connect
