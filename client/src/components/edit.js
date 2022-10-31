@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import axios from "axios";
  
 export default function Edit() {
  const [form, setForm] = useState({
    name: "",
    position: "",
    level: "",
+   photo: "",
    records: [],
  });
  const params = useParams();
@@ -50,25 +52,43 @@ export default function Edit() {
      name: form.name,
      position: form.position,
      level: form.level,
+     photo: form.photo
    };
+   let formData = new FormData();
+   formData.append('name',form.name);
+   formData.append('photo', form.photo);
+   formData.append('position',form.position);
+   formData.append('level',form.level);
+   let noerr = false;    
+   axios.post(`http://localhost:5000/update/${params.id}`, formData)
+   .catch(err => {
+      console.log(err);
+      alert("Error Occured : Unable to add new record :(");
+    })
+    .then(res => {
+      console.log(formData);
+      //setForm({ name: "", position: "", level: "" ,photo: ""});
+      navigate("/");
+      noerr = true;
+    })
+    if(noerr){navigate("/");}
+  //  // This will send a post request to update the data in the database.
+  //  await fetch(`http://localhost:5000/update/${params.id}`, {
+  //    method: "POST",
+  //    body: JSON.stringify(editedPerson),
+  //    headers: {
+  //      'Content-Type': 'application/json'
+  //    },
+  //  });
  
-   // This will send a post request to update the data in the database.
-   await fetch(`http://localhost:5000/update/${params.id}`, {
-     method: "POST",
-     body: JSON.stringify(editedPerson),
-     headers: {
-       'Content-Type': 'application/json'
-     },
-   });
- 
-   navigate("/");
+  //  navigate("/");
  }
  
  // This following section will display the form that takes input from the user to update the data.
  return (
    <div>
      <h3>Update Record</h3>
-     <form onSubmit={onSubmit}>
+     <form onSubmit={onSubmit} method="post" encType="multipart/form-data">
        <div className="form-group">
          <label htmlFor="name">Name: </label>
          <input
