@@ -1,2 +1,2 @@
 # FileUpload
-A simple web application allowing users to upload files onto their website.
+A simple MERN stack web application allowing users to store personal information about an employee.
