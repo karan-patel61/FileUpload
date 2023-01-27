@@ -28,12 +28,24 @@ const handlePhoto = (e) => {
   setIsFilePicked(true);
   setForm({photo: e.target.files[0]});
   console.log(e.target.files[0]);
+  if(e.target.files[0].size > 2000000){
+    var button = document.getElementById("submit");
+    alert("File is too big! Max File Size : 2 MB!");
+    document.getElementById("submit").disabled =true;
+  }
+  else{
+    document.getElementById("submit").disabled =false;
+  }
 
 }
 // This function will handle the submission.
  async function onSubmit(e) {
    e.preventDefault();
- 
+  if(form.photo == null){
+    alert("No File Uploaded");
+    document.getElementById("submit").disabled =true;
+    
+  }
    // When a post request is sent to the create url, we'll add a new record to the database.
    //When sending a file to backend we must user formData
    const formData = new FormData();
@@ -71,6 +83,7 @@ const handlePhoto = (e) => {
               </div>
               <div className="form-group">
                   <input
+                    id="submit"
                     type="submit"
                     value="Upload File"
                     className="btn btn-primary"
