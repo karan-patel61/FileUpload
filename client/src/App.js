@@ -9,6 +9,7 @@ import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import UploadFile from "./components/uploadfile";
+import UploadsList from "./components/uploadsList";
  
 const App = () => {
  return (
@@ -20,6 +21,7 @@ const App = () => {
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/create" element={<Create />} />
        <Route path="/uploadfile" element={<UploadFile/>}/>
+       <Route path="/uploadslist" element={<UploadsList/>}/>
      </Routes>
    </div>
  );

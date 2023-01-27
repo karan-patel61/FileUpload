@@ -4,39 +4,94 @@ import axios from "axios";
 
 export default function UploadFile() {
 const navigate = useNavigate();
-
 const [newUpload, setNewUpload] = useState();
 const [name, setName] = useState('');
+const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+// This is where we will define the field for our uploaded file object
+const [form, setForm] = useState({
+  filename: "",
+  size: "",
+  date_uploaded: "",
+  photo: ""
+  
+});
 
-
+// These methods will update the state properties.
+function updateForm(value) {
+  return setForm((prev) => {
+   return { ...prev, ...value };
+  });
+}
 const handlePhoto = (e) => {
-  setNewUpload(e.target.files[0]);
-  setName(e.target.files[0].name);
-  console.log(newUpload);
+  setSelectedFile(e.target.files[0]);
+  setIsFilePicked(true);
+  console.log(selectedFile);
 
 }
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const formData = new FormData();
-  formData.append('name', name);
-  console.log(formData.name);
-}
+// This function will handle the submission.
+ async function onSubmit(e) {
+   e.preventDefault();
+ 
+   // When a post request is sent to the create url, we'll add a new record to the database.
+   //When sending a file to backend we must user formData
+   const formData = new FormData();
+   formData.append('filename',form.filename);
+   formData.append('size', form.size);
+   formData.append('date_uploaded',form.date_uploaded);
+   formData.append('photo',form.photo);
+   let noerr = false;    
+   axios.post("http://localhost:5000/uploadfile/add", formData)
+   .catch(err => {
+      console.log(err);
+      alert("Error Occured : Unable to add new record :(");
+    })
+    .then(res => {
+      console.log(formData);
+      setForm({ name: "", position: "", level: "" ,photo: ""});
+      navigate("/");
+      noerr = true;
+    })
+    if(noerr){navigate("/");}
+    //navigate("/");
+   }
 
     // This following section will display the form that takes input from the user to update the data.
     return (
         <div>
             <h3>Uploaded Files</h3>
-            <form onSubmit={handleSubmit} encType='multipart/form-data'>
-              <input 
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              name="file"
-              onChange={handlePhoto}
-              />
-              <input
-                type="submit"
-              />
-              
+            <form onSubmit={onSubmit} encType='multipart/form-data'>
+              <div className="form-group">
+                <input 
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  name="file"
+                  onChange={(e) => updateForm({ photo: e.target.files[0] })}
+                  />
+              </div>
+              <div className="form-group">
+                  <input
+                    type="submit"
+                    value="Upload File"
+                    className="btn btn-primary"
+                    style={{ marginTop: 20 }}
+                  />
+              </div>
+              <div>
+              {isFilePicked ? (
+				        <div style={{marginLeft : 10}}>
+					        <p>Filename: {selectedFile.name}</p>
+					        <p>Filetype: {selectedFile.type}</p>
+					        <p>Size in bytes: {selectedFile.size}</p>
+					        <p>
+						        lastModifiedDate:{' '}
+						        {selectedFile.lastModifiedDate.toLocaleDateString()}
+					        </p>
+				        </div>
+			            ) : (
+				        <p>Select a file to show details</p>
+			          )}
+              </div>
               
             </form>
         </div>

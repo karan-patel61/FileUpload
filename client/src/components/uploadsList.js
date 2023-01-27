@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
  //This code defines the Record fileds that are going to be displayed.
-const Record = (props) => (
+const UploadedFile = (props) => (
  <tr>
-   <td>{props.record.name}</td>
-   <td>{props.record.position}</td>
-   <td>{props.record.level}</td>
+   <td>{props.uploads.name}</td>
+   <td>{props.uploads.size}</td>
+   <td>{props.uploads.date}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
+     <Link className="btn btn-link" to={`/edit/${props.uploads._id}`}>Edit</Link> |
      <button className="btn btn-link"
        onClick={() => {
-         props.deleteRecord(props.record._id);
+         props.deleteRecord(props.uploads._id);
        }}
      >
        Delete
      </button>
    </td>
    <td>
-      <img
-        width="100px" 
-        src={`/images/${props.record.photo}`}
-        alt=""
-      />
+   <img
+      width="100px" 
+      src={`/images/${props.uploads.photo}`}/>
    </td>
  </tr>
 );
  
-export default function RecordList() {
+export default function UploadsList() {
  const [records, setRecords] = useState([]);
  
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:5000/record/`);
+     const response = await fetch(`http://localhost:5000/uploads/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -61,12 +59,12 @@ export default function RecordList() {
  
  // This method will map out the records on the table
  function recordList() {
-   return records.map((record) => {
+   return records.map((uploads) => {
      return (
-       <Record
-         record={record}
-         deleteRecord={() => deleteRecord(record._id)}
-         key={record._id}
+       <UploadedFile
+         uploads={uploads}
+         deleteRecord={() => deleteRecord(uploads._id)}
+         key={uploads._id}
        />
      );
    });
@@ -79,9 +77,9 @@ export default function RecordList() {
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
-           <th>Name</th>
-           <th>Position</th>
-           <th>Level</th>
+           <th>Filename</th>
+           <th>Size</th>
+           <th>Date Uploaded</th>
            <th>Action</th>
          </tr>
        </thead>

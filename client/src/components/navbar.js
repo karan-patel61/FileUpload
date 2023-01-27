@@ -32,6 +32,11 @@ export default function Navbar() {
             Upload File
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/uploadslist">
+            Uploads List
+          </NavLink>
+        </li>
       </ul>
     </div>
   </nav>

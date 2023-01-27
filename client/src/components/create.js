@@ -121,6 +121,7 @@ export default function Create() {
            type="submit"
            value="Create person"
            className="btn btn-primary"
+           style={{ marginTop: 20 }}
          />
        </div>
      </form>
