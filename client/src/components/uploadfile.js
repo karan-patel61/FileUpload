@@ -26,7 +26,8 @@ function updateForm(value) {
 const handlePhoto = (e) => {
   setSelectedFile(e.target.files[0]);
   setIsFilePicked(true);
-  console.log(selectedFile);
+  setForm({photo: e.target.files[0]});
+  console.log(e.target.files[0]);
 
 }
 // This function will handle the submission.
@@ -49,11 +50,10 @@ const handlePhoto = (e) => {
     .then(res => {
       console.log(formData);
       setForm({ name: "", position: "", level: "" ,photo: ""});
-      navigate("/");
+      navigate("/uploadslist");
       noerr = true;
     })
-    if(noerr){navigate("/");}
-    //navigate("/");
+    if(noerr){navigate("/uploadslist");}
    }
 
     // This following section will display the form that takes input from the user to update the data.
@@ -66,7 +66,7 @@ const handlePhoto = (e) => {
                   type="file"
                   accept=".png, .jpg, .jpeg"
                   name="file"
-                  onChange={(e) => updateForm({ photo: e.target.files[0] })}
+                  onChange={handlePhoto }
                   />
               </div>
               <div className="form-group">

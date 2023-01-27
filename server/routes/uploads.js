@@ -39,10 +39,10 @@ UploadsRoutes.route("/uploads").get(function (req, res) {
 
 // This section will help you get a single record by id
 UploadsRoutes.route("/uploads/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
+  let db_connect = dbo.getUploads();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
-      .collection("records")
+      .collection("uploads")
       .findOne(myquery, function (err, result) {
         if (err) throw err;
         res.json(result);
@@ -67,6 +67,15 @@ UploadsRoutes.route("/uploadfile/add").post(upload.single('photo'), (req, respon
     });
    });
 
-//const selectedFile = document.getElementById('input').files[0];
+// This section will help you delete a record
+UploadsRoutes.route("/uploads/:id").delete((req, response) => {
+  let db_connect = dbo.getUploads();
+  let myquery = { _id: ObjectId( req.params.id )};
+  db_connect.collection("uploads").deleteOne(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("1 document deleted");
+    response.json(obj);
+  });
+ });
 
 module.exports = UploadsRoutes;
