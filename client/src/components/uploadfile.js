@@ -28,7 +28,7 @@ const handlePhoto = (e) => {
   setIsFilePicked(true);
   setForm({photo: e.target.files[0]});
   console.log(e.target.files[0]);
-  if(e.target.files[0].size > 2000000){
+  if(e.target.files[0].size > 2097152){
     var button = document.getElementById("submit");
     alert("File is too big! Max File Size : 2 MB!");
     document.getElementById("submit").disabled =true;
@@ -65,7 +65,7 @@ const handlePhoto = (e) => {
       navigate("/uploadslist");
       noerr = true;
     })
-    if(noerr){navigate("/uploadslist");}
+    //if(noerr){navigate("/uploadslist");}
    }
 
     // This following section will display the form that takes input from the user to update the data.
