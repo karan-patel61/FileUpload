@@ -4,8 +4,7 @@ import axios from "axios";
 
 export default function UploadFile() {
 const navigate = useNavigate();
-const [newUpload, setNewUpload] = useState();
-const [name, setName] = useState('');
+
 const [selectedFile, setSelectedFile] = useState();
 	const [isFilePicked, setIsFilePicked] = useState(false);
 // This is where we will define the field for our uploaded file object
@@ -26,17 +25,15 @@ function updateForm(value) {
 const handlePhoto = (e) => {
   setSelectedFile(e.target.files[0]);
   setIsFilePicked(true);
-  setForm({photo: e.target.files[0]});
+  updateForm({photo: e.target.files[0]});
   console.log(e.target.files[0]);
   if(e.target.files[0].size > 2097152){
-    var button = document.getElementById("submit");
     alert("File is too big! Max File Size : 2 MB!");
     document.getElementById("submit").disabled =true;
   }
   else{
     document.getElementById("submit").disabled =false;
   }
-
 }
 // This function will handle the submission.
  async function onSubmit(e) {
@@ -52,8 +49,7 @@ const handlePhoto = (e) => {
    formData.append('filename',form.filename);
    formData.append('size', form.size);
    formData.append('date_uploaded',form.date_uploaded);
-   formData.append('photo',form.photo);
-   let noerr = false;    
+   formData.append('photo',form.photo);    
    axios.post("http://localhost:5000/uploadfile/add", formData)
    .catch(err => {
       console.log(err);
@@ -63,7 +59,6 @@ const handlePhoto = (e) => {
       console.log(formData);
       setForm({ name: "", position: "", level: "" ,photo: ""});
       navigate("/uploadslist");
-      noerr = true;
     })
    }
 
