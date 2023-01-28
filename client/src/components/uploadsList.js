@@ -7,7 +7,8 @@ const UploadedFile = (props) => (
    <td>{props.uploads.size}</td>
    <td>{props.uploads.date}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.uploads._id}`}>Edit</Link> |
+     <Link className="btn btn-link" to={`/edit/${props.uploads._id}`}>Edit</Link>
+     <a href={`/images/${props.uploads.photo}`} download target="_blank" class="btn btn-link"> Download</a>
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.uploads._id);
@@ -73,7 +74,7 @@ export default function UploadsList() {
  // This following section will display the table with the records of individuals.
  return (
    <div>
-     <h3>Record List</h3>
+     <h3>Uploaded Files List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
