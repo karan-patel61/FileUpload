@@ -79,7 +79,7 @@ export default function UploadsList() {
        <thead>
          <tr>
            <th>Filename</th>
-           <th>Size</th>
+           <th>Size(Bytes)</th>
            <th>Date Uploaded</th>
            <th>Action</th>
          </tr>
