@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 let upload = multer({storage: storage});
 
 // This section will help you get a list of all the records.
-UploadsRoutes.route("/uploads").get(function (req, res) {
+UploadsRoutes.route("/uploadslist").get(function (req, res) {
  let db_connect = dbo.getUploads();
  db_connect
    .collection("uploads")
