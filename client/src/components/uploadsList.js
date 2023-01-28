@@ -7,7 +7,6 @@ const UploadedFile = (props) => (
    <td>{props.uploads.size}</td>
    <td>{props.uploads.date}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.uploads._id}`}>Edit</Link>
      <a href={`/images/${props.uploads.photo}`} download target="_blank" class="btn btn-link"> Download</a>
      <button className="btn btn-link"
        onClick={() => {
