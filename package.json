@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "cd server/ && npm start",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install express cors dotenv mongodb multer uuid -g",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
