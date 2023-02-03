@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "cd server/ && npm start",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install express && run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
