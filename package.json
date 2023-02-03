@@ -1,0 +1,19 @@
+{
+  "name": "fileupload",
+  "version": "1.0.0",
+  "description": "A simple MERN stack web application allowing users to store personal information about an employee.\r This web app also allows users to upload images to the database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karan-patel61/FileUpload.git"
+  },
+  "author": "Karan Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karan-patel61/FileUpload/issues"
+  },
+  "homepage": "https://github.com/karan-patel61/FileUpload#readme"
+}
