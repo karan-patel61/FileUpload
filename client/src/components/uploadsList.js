@@ -30,7 +30,7 @@ export default function UploadsList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:5000/uploadslist/`);
+     const response = await fetch(`https://fileupload-app.herokuapp.com/uploadslist/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -49,7 +49,7 @@ export default function UploadsList() {
  
  // This method will delete a record
  async function deleteRecord(id) {
-   await fetch(`http://localhost:5000/uploads/${id}`, {
+   await fetch(`https://fileupload-app.herokuapp.com/uploads/${id}`, {
      method: "DELETE"
    });
  
