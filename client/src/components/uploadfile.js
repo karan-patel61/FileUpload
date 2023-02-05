@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 export default function UploadFile() {

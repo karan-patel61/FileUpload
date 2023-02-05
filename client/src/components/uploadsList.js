@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
  //This code defines the Record fileds that are going to be displayed.
 const UploadedFile = (props) => (
  <tr>
