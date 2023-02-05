@@ -57,7 +57,8 @@ UploadsRoutes.route("/uploadfile/add").post(upload.single('photo'), (req, respon
       name: req.file.filename,
       size: req.file.size,
       photo: req.file.filename,
-      date: d
+      date: d,
+      destination : storage.destination
     };
     //console.log("A new file uploaded +"+myobj);
     db_connect.collection("uploads").insertOne(myobj, function (err, res) {
