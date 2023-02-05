@@ -17,7 +17,8 @@ const UploadedFile = (props) => (
    </td>
    <td>
    <img
-      width="100px" 
+      width="100px"
+      alt="" 
       src={`/images/${props.uploads.photo}`}/>
    </td>
  </tr>
