@@ -48,12 +48,6 @@ export default function Edit() {
  
  async function onSubmit(e) {
    e.preventDefault();
-   const editedPerson = {
-     name: form.name,
-     position: form.position,
-     level: form.level,
-     photo: form.photo
-   };
    let formData = new FormData();
    formData.append('name',form.name);
    formData.append('photo', form.photo);
@@ -151,6 +145,7 @@ export default function Edit() {
        <div className="form-group">
           <img
           width="100px"
+          alt = ""
           src={`/images/${form.photo}`}
           />
           <input 
