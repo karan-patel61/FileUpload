@@ -21,7 +21,7 @@ app.listen(port, () => {
  //My change made on this line
 });
 // app.get('/', (req, res) => { res.send('Hello from Express!'+" On Port: "+port)});
-app.use(express.static(path.join(__dirname, '../client')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client')) 
-});
+// app.use(express.static(path.join(__dirname, '../client')));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../')) 
+// });
