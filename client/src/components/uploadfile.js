@@ -50,7 +50,7 @@ const handlePhoto = (e) => {
    formData.append('size', form.size);
    formData.append('date_uploaded',form.date_uploaded);
    formData.append('photo',form.photo);    
-   axios.post("http://localhost:5001/uploadfile/add", formData)
+   axios.post("http://fileupload-app.herokuapp.com/uploadfile/add", formData)
    .catch(err => {
       console.log(err);
       alert("Error Occured : Unable to add new record :(");
