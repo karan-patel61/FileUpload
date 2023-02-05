@@ -6,7 +6,7 @@ const UploadedFile = (props) => (
    <td>{props.uploads.size}</td>
    <td>{props.uploads.date}</td>
    <td>
-     <a href={`/images/${props.uploads.photo}`} download target="_blank" rel="noreferrer" class="btn btn-link"> Download</a>
+     <a href={`build/images/${props.uploads.photo}`} download target="_blank" rel="noreferrer" class="btn btn-link"> Download</a>
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.uploads._id);
