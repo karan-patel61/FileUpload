@@ -6,7 +6,7 @@ const UploadedFile = (props) => (
    <td>{props.uploads.size}</td>
    <td>{props.uploads.date}</td>
    <td>
-     <a href={`/images/${props.uploads.photo}`} download target="_blank" rel="noreferrer" class="btn btn-link"> Download</a>
+     <a href={`../build/images/${props.uploads.photo}`} download target="_blank" class="btn btn-link"> Download</a>
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.uploads._id);
@@ -30,7 +30,7 @@ export default function UploadsList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`https://fileupload-app.herokuapp.com/uploadslist/`);
+     const response = await fetch(`http://localhost:5001/uploadslist/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -49,7 +49,7 @@ export default function UploadsList() {
  
  // This method will delete a record
  async function deleteRecord(id) {
-   await fetch(`https://fileupload-app.herokuapp.com/uploads/${id}`, {
+   await fetch(`http://localhost:5001/uploads/${id}`, {
      method: "DELETE"
    });
  
