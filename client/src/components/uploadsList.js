@@ -72,6 +72,7 @@ export default function UploadsList() {
  
  // This following section will display the table with the records of individuals.
  return (
+  <title > FileUpload App
    <div>
      <h3>Uploaded Files List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
@@ -86,5 +87,6 @@ export default function UploadsList() {
        <tbody>{recordList()}</tbody>
      </table>
    </div>
+   </title>
  );
 }
