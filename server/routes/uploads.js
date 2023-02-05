@@ -16,7 +16,7 @@ const ObjectId = require("mongodb").ObjectId;
 //This section will define the multer storage
 const storage = multer.diskStorage({
   destination: function(req, file, cb){
-    cb(null,'');
+    cb(null,'/build/images');
   },
   filename: function(req, file, cb){
     cb(null, uuidv4()+file.originalname);
