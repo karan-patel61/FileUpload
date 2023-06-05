@@ -58,7 +58,7 @@ const handlePhoto = (e) => {
     .then(res => {
       console.log(formData);
       setForm({ name: "", position: "", level: "" ,photo: ""});
-      navigate("/uploadsList");
+      navigate("/uploadslist");
     })
    }
 
